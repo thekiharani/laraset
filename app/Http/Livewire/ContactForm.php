@@ -18,6 +18,8 @@ class ContactForm extends Component
 	}
 
     public function render() {
+        $timezone = timezone_name_from_abbr(null, 1 * 3600, TRUE);
+        // dd('{!! <sctipt>Date.getTimezoneOffset()</sctipt> !!}');
         return view('livewire.contact-form');
     }
 

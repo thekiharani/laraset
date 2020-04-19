@@ -13,12 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@welcome')->name('welcome');
 
 Route::view('contact', 'contact')->name('contact');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::layout('layouts.app')->section('content')->prefix('blog')->name('blog.')->middleware('auth')->group(function () {
+	// Categories
+	Route::livewire('categories', 'categories.list-all')->name('category.index');
+	Route::livewire('category/create', 'categories.create')->name('category.create');
+	Route::livewire('category/{category}/edit', 'categories.edit')->name('category.edit');
+    Route::livewire('category/{slug}_{category}', 'categories.show')->name('category.show');
+
+    // Posts
+    Route::livewire('posts', 'posts.list-all')->name('post.index');
+	Route::livewire('post/create', 'posts.create')->name('post.create');
+	Route::livewire('post/{post}/edit', 'posts.edit')->name('post.edit');
+    Route::livewire('post/{slug}_{post}', 'posts.show')->name('post.show');
+});

@@ -1,6 +1,14 @@
 <div class="card">
 	<p class="card-header text-center h3">Contact Us</p>
 	<div class="card-body">
+
+
+		<div class="h3 text-success text-center" wire:poll.1000ms>
+		    Current time: {{ now()->setTimezone('Africa/Nairobi')->format('jS F, Y | g:i:s A') }}
+		    <p>{{ _('Time Zone: '). now()->getTimezone() }}</p>
+		</div>
+
+
 	    <form wire:submit.prevent="submit">
 
 	    	@if (session('success'))

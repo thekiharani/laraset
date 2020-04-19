@@ -36,4 +36,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // A user may have many categories
+    public function categories() {
+        return $this->hasMany('Category', 'user_id');
+    }
+
+    // A user may have many posts
+    public function posts() {
+        return $this->hasMany('Post', 'user_id');
+    }
 }
